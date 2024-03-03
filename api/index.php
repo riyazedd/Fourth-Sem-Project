@@ -2,6 +2,8 @@
 
 require_once "connection.php";
 
+header("Access-Control-Allow-Origin: *");
+
 $server=$_SERVER['REQUEST_METHOD'];
 
 function getUser()

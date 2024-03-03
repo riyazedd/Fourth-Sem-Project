@@ -3,7 +3,7 @@
 $host="localhost";
 $user="root";
 $password="";
-$db="bcafourthsemproject";
+$db="fourthsemproject";
 
 $conn=mysqli_connect($host,$user,$password,$db);
 if(!$conn){
