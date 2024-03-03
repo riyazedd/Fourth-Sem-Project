@@ -10,6 +10,8 @@ function HomeComponent(){
     },[]);
 
     return (
+        <div>
+            <h1>Students List</h1>
         <Table striped bordered hover>
             <thead>
                 <tr>
@@ -30,6 +32,7 @@ function HomeComponent(){
             ))}
             </tbody>
         </Table>
+        </div>
     )
 }
 
