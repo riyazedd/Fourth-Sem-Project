@@ -15,7 +15,7 @@ function getUser()
 {
     $sql = "SELECT * FROM students";
     $result = mysqli_query($GLOBALS['conn'], $sql);
-    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);   
     echo json_encode($users);
 }
 

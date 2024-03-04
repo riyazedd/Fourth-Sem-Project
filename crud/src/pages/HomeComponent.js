@@ -9,6 +9,15 @@ function HomeComponent(){
     }).catch((error)=>{console.log(error)})
     },[]);
 
+    const deleteData=(id)=>{
+        data={
+            id:id
+        }
+        axios.delete("http://localhost/fourthsemproject/api/",data).then((response)=>{
+            alert("Data Deleted");
+        })
+    }
+
     return (
         <div>
             <h1>Students List</h1>
@@ -19,6 +28,7 @@ function HomeComponent(){
                     <th>Name</th>
                     <th>Email</th>
                     <th>Address</th>
+                    <th colspan="2">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +38,8 @@ function HomeComponent(){
                     <td>{student.name}</td>
                     <td>{student.email}</td>
                     <td>{student.address}</td>
+                    <td><button class="btn btn-warning" >Edit</button></td>
+                    <td><button class="btn btn-danger" onClick={()=>deleteData(student.id)}>Delete</button></td>
                 </tr>
             ))}
             </tbody>
