@@ -1,28 +1,43 @@
+import { useState } from 'react';
+import axios from 'axios';
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 function AddStudentComponent() {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [address, setAddress] = useState('');
+
+    const insertStudent = (e) => {
+        e.preventDefault();
+        let data = { name, email, address };
+        axios.post("http://localhost/fourthsemproject/api/",data)
+            .then((response)=>{console.log(response)})
+            .catch((e)=>{
+                console.log(e);
+            })
+    }
     return (
         <div>
             <h1>Add Students</h1>
-        <Form>
-            <Form.Group className="mb-3" controlId="formBasicText">
-                <Form.Label>Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter Name" />
-            </Form.Group>
+            <Form onSubmit={insertStudent}>
+                <Form.Group className="mb-3" controlId="formBasicText">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type="text" placeholder="Enter Name" onChange={(e) => setName(e.target.value)} />
+                </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" placeholder="Email" />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicText">
-                <Form.Label>Address</Form.Label>
-                <Form.Control type="text" placeholder="Address" />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </Form>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicText">
+                    <Form.Label>Address</Form.Label>
+                    <Form.Control type="text" placeholder="Address" onChange={(e) => setAddress(e.target.value)} />
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
         </div>
     )
 }
