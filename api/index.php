@@ -33,9 +33,8 @@ if($server=="GET"){
         echo "Error adding data";
     }
 }else if($server=="DELETE"){
-    $myEntireBody= file_get_contents('php://input');
-    $myBody= json_decode($myEntireBody);
-    $id=$myBody->id;
+    $id=$_REQUEST['id'];
+    
     $sql="DELETE FROM students WHERE id=$id";
     if(mysqli_query($conn,$sql)){
         echo "User deleted succesfully";
