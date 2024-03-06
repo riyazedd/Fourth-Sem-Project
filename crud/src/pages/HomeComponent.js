@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import Table from 'react-bootstrap/Table';
+import {Link} from 'react-router-dom';
 
 function HomeComponent() {
     const [students, setStudents] = useState([]);
@@ -44,7 +45,7 @@ function HomeComponent() {
                             <td>{student.name}</td>
                             <td>{student.email}</td>
                             <td>{student.address}</td>
-                            <td><button class="btn btn-warning" >Edit</button></td>
+                            <td><Link to={`update-student/${student.id}`} class="btn btn-warning" >Edit</Link></td>
                             <td><button class="btn btn-danger" onClick={() => deleteData(student.id)}>Delete</button></td>
                         </tr>
                     ))}

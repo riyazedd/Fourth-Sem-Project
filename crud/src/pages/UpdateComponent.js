@@ -20,7 +20,7 @@ function UpdateComponent() {
     }
     return (
         <div>
-            <h1>Add Students</h1>
+            <h1>Update Students</h1>
             <Form onSubmit={updateStudent}>
                 <Form.Group className="mb-3" controlId="formBasicText">
                     <Form.Label>Name</Form.Label>
