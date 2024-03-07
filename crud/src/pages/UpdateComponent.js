@@ -1,20 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { useParams } from 'react-router';
 
 function UpdateComponent() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
+    const { id } = useParams();
+
+    const getUser = () => {
+        axios.get(`http://localhost/fourthsemproject/api/?id=${id}`).then((response) => {
+            let user = response.data;
+            setName(user.name);
+            setEmail(user.email);
+            setAddress(user.address);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+
+    useEffect(() => {
+        getUser();
+    }, [])
 
     const updateStudent = (e) => {
         e.preventDefault();
-        let data = { name, email, address };
-        axios.put("http://localhost/fourthsemproject/api/",data).then((response)=>{
-                alert("Data Was Updated");
-            })
-            .catch((e)=>{
+        let data = { id, name, email, address };
+        axios.put("http://localhost/fourthsemproject/api/", data).then((response) => {
+            alert("Data Was Updated");
+            setName("");
+            setEmail("");
+            setAddress("");
+        })
+            .catch((e) => {
                 console.log(e);
             })
     }
@@ -29,11 +49,11 @@ function UpdateComponent() {
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email</Form.Label>
-                    <Form.Control value={email}  type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+                    <Form.Control value={email} type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} disabled />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicText">
                     <Form.Label>Address</Form.Label>
-                    <Form.Control value={address}  type="text" placeholder="Address" onChange={(e) => setAddress(e.target.value)} />
+                    <Form.Control value={address} type="text" placeholder="Address" onChange={(e) => setAddress(e.target.value)} />
                 </Form.Group>
                 <Button variant="primary" type="submit">
                     Submit

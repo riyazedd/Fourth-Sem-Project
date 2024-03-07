@@ -13,10 +13,18 @@ $server=$_SERVER['REQUEST_METHOD'];
 
 function getUser()
 {
-    $sql = "SELECT * FROM students";
-    $result = mysqli_query($GLOBALS['conn'], $sql);
-    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);   
-    echo json_encode($users);
+    if(!empty($_REQUEST['id'])){
+        $id=$_REQUEST['id'];
+        $sql = "SELECT * FROM students WHERE id=$id";
+        $result = mysqli_query($GLOBALS['conn'], $sql);
+        $users = mysqli_fetch_assoc($result);   
+        echo json_encode($users);
+    }else{
+        $sql = "SELECT * FROM students";
+        $result = mysqli_query($GLOBALS['conn'], $sql);
+        $users = mysqli_fetch_all($result, MYSQLI_ASSOC);   
+        echo json_encode($users);
+    }
 }
 
 if($server=="GET"){
